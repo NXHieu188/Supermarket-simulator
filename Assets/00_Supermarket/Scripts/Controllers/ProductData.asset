@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ded02b00629a35488e9ae80e9127b6f, type: 3}
+  m_Name: ProductData
+  m_EditorClassIdentifier: 
+  lstProduct:
+  - typeProduct: 0
+    icon: {fileID: 21300000, guid: 7e6c4d48533e75f4785549020fcab9c8, type: 3}
+    productName: Chips
+    companyName: Lies
+    unitPrice: 1.15
+    prefab: {fileID: 8501125740192022315, guid: f59a54763949bb942a3c190a12d931ce, type: 3}
+    mateOutLine: {fileID: 2100000, guid: d5b08f8c0f57c7e46823e34140c6c1e0, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 8ea938ceeae49df448fdf2a20912cfdd, type: 2}
+  - typeProduct: 1
+    icon: {fileID: 21300000, guid: 334c522c54666c04084d13502f602975, type: 3}
+    productName: Cafe
+    companyName: San
+    unitPrice: 0.92
+    prefab: {fileID: 3767548160928483718, guid: 557b45d2279b9bc4f80ec2cf59e77223, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 74f73feaea72a9147ba4b263b63b9b37, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: a19ff2e7f704ded4790405ae840c1726, type: 2}
+  - typeProduct: 2
+    icon: {fileID: 21300000, guid: b6933017cfc357540a93b364a770b6f5, type: 3}
+    productName: Chocolate Spread
+    companyName: Nutoka
+    unitPrice: 0.97
+    prefab: {fileID: 6661900389499981246, guid: d0108cdbdbd6abd4dbaf893d22718cf7, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 6652343dc71f673488b83e5fe667b0fa, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 62660ce11cb83ed419bc04663e267cfd, type: 2}
+  - typeProduct: 3
+    icon: {fileID: 21300000, guid: 2c2f8be6a66227244b2d5c5472a8a103, type: 3}
+    productName: Milk
+    companyName: LacTroi
+    unitPrice: 1.12
+    prefab: {fileID: 3082503542325755331, guid: 252245cac33d0124b82c22cc3d5adb4d, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 1b203f57827b82344961e83f42c4f666, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 624a0dd26c7ff34488aaf38f683badc6, type: 2}
+  - typeProduct: 4
+    icon: {fileID: 21300000, guid: eca3008f368290848b9f70804b3c1c19, type: 3}
+    productName: Candy
+    companyName: M&M
+    unitPrice: 1.4
+    prefab: {fileID: 7008357910582562836, guid: 82b73a99c4a91034ba0e166668dcaf7f, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 3312c3ba36878d949abe10880b6a740f, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: a0972e8f3cb43f842a96d54c941bc13d, type: 2}
+  - typeProduct: 5
+    icon: {fileID: 21300000, guid: f63b7cb93678725449f706dd49ae76c0, type: 3}
+    productName: Cake
+    companyName: Ducatti Fire
+    unitPrice: 1.36
+    prefab: {fileID: 6808555650905996073, guid: 475407e5e5080784abf35e6668b9f0a9, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 45007c858bbf5514e90d948638df2f47, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 663c5e383ecf6c24aa1ca481e5267727, type: 2}
+  - typeProduct: 6
+    icon: {fileID: 21300000, guid: 1c72962fb1bfec142953ef78b4181a85, type: 3}
+    productName: Cheese
+    companyName: Crap - Doubles
+    unitPrice: 1.63
+    prefab: {fileID: 180126578311362808, guid: 82593c63d939af34aacd3105bae5bdb3, type: 3}
+    mateOutLine: {fileID: 2100000, guid: d69fc7f647c01bb429ca8a4efa41d23c, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 92ec7e7ea0c24324a9637b95dc5b2f45, type: 2}
+  - typeProduct: 7
+    icon: {fileID: 21300000, guid: f7e8dc9375261594fa40ad97aa4cf0be, type: 3}
+    productName: Pasta spaghetti
+    companyName: zuckerberg helper
+    unitPrice: 1.55
+    prefab: {fileID: 8760684872577810474, guid: 26dc2b277b3fd9d43a7111169bab3573, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 7dc15ac8dc858fe4db5b922da36b9511, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 9324e3871abb9d146960adb29fb07cc4, type: 2}
+  - typeProduct: 8
+    icon: {fileID: 21300000, guid: 06f43809f01cc6b4aaad911424357127, type: 3}
+    productName: Rice
+    companyName: Rice Dickies
+    unitPrice: 2
+    prefab: {fileID: 841162381587456195, guid: 1539cf18b145cba4ea3ff17ba15aa914, type: 3}
+    mateOutLine: {fileID: 2100000, guid: d69fc7f647c01bb429ca8a4efa41d23c, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 92ec7e7ea0c24324a9637b95dc5b2f45, type: 2}

@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SA_UI_Summary
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 48
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 51
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: ecf7ab1f540576e49ab618a5c9fd0abb, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 856c6e0051204aa48aded835acb4d430, type: 3}
+  - {fileID: 21300000, guid: f8a8e251fdd98b94c90146484ad5814b, type: 3}
+  - {fileID: 21300000, guid: ce0947a2dfd32ce4b9950fbf9a2eabb8, type: 3}
+  - {fileID: 21300000, guid: 11a60083d26fe39468d72ef8aa1d755b, type: 3}
+  - {fileID: 21300000, guid: 276997c5053849f4eb4266db856aedc8, type: 3}
+  - {fileID: 21300000, guid: 4691d07615cbc374a97a041e371fc8f6, type: 3}
+  - {fileID: 21300000, guid: 46f37cd792bbdbb43abc12979234e2e4, type: 3}
+  - {fileID: 21300000, guid: c8b0489824185f945ade1020037d7fe9, type: 3}
+  - {fileID: 21300000, guid: 00e2c7098c52482438331ea844281fb5, type: 3}
+  - {fileID: 21300000, guid: 62524e8a467ffd6448104e66c3555b32, type: 3}
+  - {fileID: 21300000, guid: 31b696fa18a6c9a4bac281bd3ebe68a9, type: 3}
+  - {fileID: 21300000, guid: 3911643c849b8a54a9be8b828673a2e7, type: 3}
+  - {fileID: 21300000, guid: 79a6ae3c28d789544974be4ce4fe4cba, type: 3}
+  - {fileID: 21300000, guid: e8777adc10b4bfd4b9e32bf5c0ad0f99, type: 3}
+  - {fileID: 21300000, guid: 523eb70df7db7f14b96b1da2253ade13, type: 3}
+  - {fileID: 21300000, guid: 10ca19edabb2e924fb818b60a69d2e82, type: 3}
+  - {fileID: 21300000, guid: 89173a2eb8436d44bbb86926c27772d1, type: 3}
+  - {fileID: 21300000, guid: 5dec3abe69d5676479594974ccdc949b, type: 3}
+  - {fileID: 21300000, guid: f6159f4f7cd9d544e9c0b205a9287f01, type: 3}
+  - {fileID: 21300000, guid: b55018af132ce2340bded20960f414a5, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - ProfitBase (3)
+  - UnhaopyCirrcle
+  - CircleBase
+  - ProfitBase (2)
+  - NoBuyCircle
+  - X
+  - HappyCircle
+  - Summery_LevelProcess (2)
+  - CustomerBase
+  - Shape 730
+  - ProfitBase (1)
+  - user_8840965
+  - angry_1933552
+  - PopUp
+  - LevelBase
+  - LevelBase2
+  - smile_1933691
+  - sad_1933590
+  - Summery_LevelProcess (1)
+  - Info_Icon
+  m_RenderDataMap: {}
+  m_Tag: SA_UI_Summary
+  m_IsVariant: 0
