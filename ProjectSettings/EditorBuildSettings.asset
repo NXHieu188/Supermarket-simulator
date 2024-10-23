@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_Supermarket/Scenes/PLY2_1.unity
     guid: 017445d6a8928ca49a5979adb385c3b4
+  - enabled: 1
+    path: Assets/01_PetShop/Scenes/PetShop_Scene_3.unity
+    guid: fe29fe017694e564cb7cb73523538fdd
   m_configObjects: {}

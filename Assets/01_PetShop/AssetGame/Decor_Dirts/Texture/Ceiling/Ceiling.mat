@@ -114,13 +114,13 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Lumin: 1.18
-    - _MaxLight: 0.382
+    - _Lumin: 0.5
+    - _MaxLight: 0.68
     - _Metallic: 0
-    - _MinLight: 0.564
+    - _MinLight: 0.579
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset: 0
+    - _Offset: 0.3
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -134,8 +134,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _Steps: 12.1
-    - _StpSmooth: 0
+    - _Steps: 15.9
+    - _StpSmooth: 0.801
     - _Surface: 0
     - _UVSec: 0
     - _WorkflowMode: 1

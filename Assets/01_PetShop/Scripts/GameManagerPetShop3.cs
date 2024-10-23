@@ -1,5 +1,6 @@
 using Cinemachine;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,8 @@ public enum MisisonGamePlay3
 {
     GetBoxCat,
     PutCatToCage,
+    GetBoxObj,
+    PlaceObj,
 }
 public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
 {
@@ -23,11 +26,6 @@ public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
     {
         Luna.Unity.LifeCycle.GameStarted();
         totalSlot = containerShelf.childCount;
-        indexCustomer = 0;
-        //currentCustomer = lstCustomer[indexCustomer];
-        totalPriceCheckOut = 0;
-        //curObjParent = lstObj[0];
-        //curFillPosObjParent = lstFillPosObj[0];
         mission = MisisonGamePlay3.GetBoxCat;
         ActionMoveCatToCage();
         HandleButtonClick(false);
@@ -43,17 +41,66 @@ public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
         }
     }
     //MoveCatToCage
+    public Transform VC_camFollow;
+
+    [Header("MoveCatToCage")]
     public Transform boxCat;
     public Transform cat;
     public Animator catInBox;
     public Transform VC_Start;
     public Transform VC_camCatToBox1;
-    public Transform VC_camFollow;
+
     public Transform VC_camRotateCatCage;
     public Material matebox, mateboxOL;
     public MeshRenderer boxCatMesh;
+    [HideInInspector] public bool isDoneCat;
+
+    //PlaceObj
+    [Header("MoveToPlaceObj")]
+    public Transform VC_camMoveToPlaceObj;
+    public Transform VC_camMoveToPlaceObj1;
+    public Transform VC_camMoveToPlaceObj2;
+
+    [Header("EndGame")]
+    public Transform VC_camEndGame;
     //[SerializeField] private SkinnedMeshRenderer skinnedBoxCat;
     //private MaterialPropertyBlock blockMaterialskinnedBoxCat;
+
+
+    public ProductData productData;
+    //UI
+    public GameObject shopping;
+    public GameObject handGuide;
+    public TextMeshProUGUI txtMoney;
+    public TextMeshProUGUI txtMission;
+    public GameObject missionObj;
+    public Image sliderProgress;
+    public float totalMoney;
+
+    //Spawn
+    public Transform lstPosParent;
+    public Transform container;
+    public GameObject box;
+
+    public Button btnPlace;
+
+    private List<GameObject> lstProduct = new List<GameObject>();
+    private int totalSlot;
+    private int index;
+    //Shelf
+    public Transform parentPosShelf;
+    public Transform containerShelf;
+
+    //End
+    public GameObject cameraEnd;
+    public GameObject readyOpen;
+    public GameObject btnOpen;
+    public GameObject arrowOpen;
+
+
+    public AudioManager audioManager;
+    private ProductPetShop productChoose;
+    [HideInInspector] public bool isEndGame;
     public void ActionMoveCatToCage()
     {
         cinemachineBrain.m_DefaultBlend.m_Time = 0.4f;
@@ -78,9 +125,10 @@ public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
                     //    skinnedBoxCat.SetPropertyBlock(blockMaterialskinnedBoxCat);
                     //}
                     boxCatMesh.material = mateboxOL;
-                    boxCat.GetChild(2).gameObject.SetActive(true);
+                    boxCat.GetChild(3).gameObject.SetActive(true);
                     isInMission = true;
                     HandleButtonClick(true);
+                    HandleHandTut(true);
                 }, 0.4f));
 
             }, 0.6f));
@@ -94,7 +142,6 @@ public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
     {
         handTut.gameObject.SetActive(boolean);
     }
-    //-2.1 1.24 4.5
     public void ClickHandGet()
     {
         if (!isInMission)
@@ -105,10 +152,11 @@ public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
                 isInMission = false;
                 HandleHandTut(false);
                 HandleButtonClick(false);
-                boxCat.GetChild(2).gameObject.SetActive(false);
+                boxCat.GetChild(3).gameObject.SetActive(false);
+                boxCatMesh.material = matebox;
+                AudioManager.Instance.PlaySoundClipMoveBox();
                 boxCat.transform.DOMove(new Vector3(-3.717f, 0.707f, 11.682f), 0.5f).OnComplete(() =>
                 {
-                    boxCatMesh.material = matebox;
                     boxCat.SetParent(charFollow);
                     boxCat.localPosition = new Vector3(0, -0.6f, 0);
                     boxCat.localEulerAngles = new Vector3(0, 0, 0);
@@ -126,222 +174,85 @@ public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
                     });
                 });
                 boxCat.transform.DORotateQuaternion(Quaternion.Euler(0, -27, 0), 0.5f);
-
                 break;
             case MisisonGamePlay3.PutCatToCage:
                 isInMission = false;
                 HandleHandTut(false);
                 HandleButtonClick(false);
                 cat.parent = null;
+                AudioManager.Instance.PlaySoundClipPlace();
                 cat.transform.DOJump(new Vector3(-0.38f, 0.285f, 5.958f), 1.3f, 1, 0.7f).OnComplete(() =>
                 {
-                    boxCat.transform.DOLocalMove(new Vector3(boxCat.transform.localPosition.x, box.transform.localPosition.y + 1.6f, boxCat.transform.localPosition.z), 0.5f).OnComplete(() =>
+                    isDoneCat = true;
+                    sliderProgress.DOFillAmount(0.4f, 0.2f);
+                    AudioManager.Instance.PlaySoundClipMoveBox();
+                    boxCat.transform.DOLocalMove(new Vector3(boxCat.transform.localPosition.x - 2, boxCat.transform.localPosition.y, boxCat.transform.localPosition.z), 0.5f).OnComplete(() =>
                     {
                         Destroy(boxCat.gameObject);
+                        txtMission.text = "Buy items for the store";
+                        mission = MisisonGamePlay3.PlaceObj;
+                        isInMission = true;
+                        VC_camMoveToPlaceObj.gameObject.SetActive(true);
+                        cinemachineBrain.m_DefaultBlend.m_Time = 0.4f;
+                        StartCoroutine(HelperUtility.StartAction(() =>
+                        {
+                            VC_camMoveToPlaceObj.gameObject.SetActive(false);
+                            VC_camMoveToPlaceObj1.gameObject.SetActive(true);
+                            cinemachineBrain.m_DefaultBlend.m_Time = 0.6f;
+                            StartCoroutine(HelperUtility.StartAction(() =>
+                            {
+                                VC_camMoveToPlaceObj1.gameObject.SetActive(false);
+                                VC_camMoveToPlaceObj2.gameObject.SetActive(true);
+                                cinemachineBrain.m_DefaultBlend.m_Time = 0.4f;
+                                StartCoroutine(HelperUtility.StartAction(() =>
+                                {
+                                    shopping.gameObject.SetActive(true);
+                                    handGuide.SetActive(true);
+                                }, 0.41f));
+                            }, 0.75f));
+                        }, 0.55f));
                     });
                 });
                 break;
+
         }
     }
-
-    public AudioManager audioManager;
-    private ProductPetShop productChoose;
-    //Spawn
-    public Transform lstPosParent;
-    public Transform container;
-    public GameObject box;
-
-    public Button btnPlace;
-    public GameObject arrow;
-
-    private List<GameObject> lstProduct = new List<GameObject>();
-    private int totalSlot;
-    private int index;
-    //Shelf
-    public Transform parentPosShelf;
-    public Transform containerShelf;
-
-    //End
-    public GameObject cameraEnd;
-    public GameObject readyOpen;
-    public GameObject btnOpen;
-    public GameObject arrowOpen;
-    [HideInInspector] public bool isEndGame;
-
-    //Payment
-    public List<CustomerPetShopp> lstCustomer;
-    public List<Transform> lstObj;
-    public List<Transform> lstFillPosObj;
-    public TextMeshProUGUI txtPerformCheckout;
-    public GameObject guideClick;
-    public GameObject hanGuideClick1;
-    public GameObject hanGuideClick2;
-    public GameObject hanGuideClick3;
-    [HideInInspector] public bool availableSecondGuide;
-    [HideInInspector] public bool availableThirtyGuide;
-    public RaycastItemPetShop raycastItem;
-    private Transform curObjParent;
-    private Transform curFillPosObjParent;
-    [HideInInspector] public CustomerPetShopp currentCustomer;
-    public GameObject checkoutCard;
-    public GameObject checkoutCash;
-    public TextMeshProUGUI txtTotalPriceCard;
-    public TextMeshProUGUI txtReceiveCash;
-    public TextMeshProUGUI txtTotalPriceCash;
-    public TextMeshProUGUI txtChangeCash;
-    public TextMeshProUGUI txtGivingCashDF;
-    public TextMeshProUGUI txtGivingCash;
-    [HideInInspector] public float totalPriceCheckOut = 0;
-    public GameObject dashCard, dashCash;
-    public GameObject uiChecKOutCard;
-    public GameObject uiChecKOutCash;
-    private int indexCustomer;
-
-    public void ActionGuide(bool show)
+    public void GetProductChoose(TypeProductPetShop type)
     {
+        productChoose = productData.GetProductPetShop(type);
+    }
+    public void ActionGuide()
+    {
+        handGuide.SetActive(false);
     }
     //13.205
     public void CaculatorMoney(float subPrice, TypeProductPetShop type)
     {
-
-    }
-    public void ActiveUICheckOut(TypeCheckOut type)
-    {
-        if (type == TypeCheckOut.CARD)
+        totalMoney -= subPrice;
+        var str = totalMoney.ToString("0.0");
+        txtMoney.text = "$" + str;
+        GetProductChoose(type);
+        shopping.transform.DOScale(Vector2.zero, 0.5f).OnComplete(() =>
         {
-            checkoutCard.SetActive(true);
-
-            checkoutCard.GetComponent<RectTransform>().DOAnchorPosX(-298f, 0.35f);
-            dashCard.SetActive(true);
-            uiChecKOutCard.gameObject.SetActive(true);
-            uiChecKOutCash.gameObject.SetActive(false);
-            if (indexCustomer == 2)
-                EndGame();
-            currentCustomer.cusAnim.methodPay.SetActive(false);
-
-        }
-        else
+            shopping.SetActive(false);
+        });
+        box.SetActive(true);
+        box.transform.DOMoveZ(9.69f, 0.7f).OnComplete(() =>
         {
-            checkoutCash.SetActive(true);
-            dashCash.SetActive(true);
-            uiChecKOutCard.gameObject.SetActive(false);
-            uiChecKOutCash.gameObject.SetActive(true);
-            audioManager.PlaySoundOpenCash();
-            checkoutCash.SetActive(true);
-            checkoutCash.GetComponent<RectTransform>().DOAnchorPosX(-304f, 0.35f);
-            txtReceiveCash.text = "$" + (totalPriceCheckOut + currentCustomer.change);
-            txtTotalPriceCash.text = "$" + totalPriceCheckOut;
-            txtChangeCash.text = "$" + currentCustomer.change.ToString("0.00");
-            currentCustomer.cusAnim.methodPay.SetActive(false);
-        }
-
-    }
-    public void AddMoney()
-    {
-    }
-    public void ActionCustomer()
-    {
-        float delay = 0;
-        curObjParent.gameObject.SetActive(true);
-        for (int i = 0; i < curObjParent.childCount; i++)
+            btnPlace.gameObject.SetActive(true);
+            txtMission.text = "Tap to place object on the shelf";
+        });
+        for (int i = 0; i < lstPosParent.childCount; i++)
         {
-            StartCoroutine(IEMoveObj(delay, i));
-            delay += 0.17f;
-        }
-    }
-    public void EndCustomer()
-    {
-        if (currentCustomer.typeCheckOut == TypeCheckOut.CARD)
-        {
-            totalPriceCheckOut = 0;
-            txtTotalPriceCard.text = "$" + 0;
-            checkoutCard.SetActive(false);
-            dashCard.SetActive(false);
-            //hanGuideClick3.SetActive(false);
-            currentCustomer.End();
-        }
-        else
-        {
-            txtTotalPriceCard.text = "$0";
-            checkoutCash.SetActive(false);
-            dashCash.SetActive(false);
-            uiChecKOutCash.gameObject.SetActive(false);
-            uiChecKOutCard.gameObject.SetActive(true);
-            currentCustomer.End();
-        }
-    }
-    IEnumerator IEMoveObj(float delay, int index)
-    {
-        yield return new WaitForSeconds(delay);
-        audioManager.PlaySoundClipPlace();
-        curObjParent.GetChild(index).transform.DOJump(curFillPosObjParent.GetChild(index).transform.position, 0.6f, 1, 0.35f);
-        if (index == curFillPosObjParent.childCount - 1)
-        {
-            StartCoroutine(IEDelayCanPlay());
-        }
-    }
-    IEnumerator IEDelayCanPlay()
-    {
-        yield return new WaitForSeconds(0.35f);
-        raycastItem.isCanPlay = true;
-        //ActionGuide(true);
-    }
-    public void UpdateTurnCheckOut()
-    {
-        indexCustomer++;
-        txtPerformCheckout.text = "Perform Checkout\n" + indexCustomer.ToString() + "/3";
-        currentCustomer = lstCustomer[indexCustomer];
-        currentCustomer.gameObject.SetActive(true);
-        totalPriceCheckOut = 0;
-        currentCustomer.CheckOut();
-        curObjParent = lstObj[indexCustomer];
-        curFillPosObjParent = lstFillPosObj[indexCustomer];
-    }
-    public void UpdatePrice(float price)
-    {
-        totalPriceCheckOut += price;
-
-        if (currentCustomer.typeCheckOut == TypeCheckOut.CARD)
-        {
-            txtTotalPriceCard.text = "$" + totalPriceCheckOut.ToString("0.00");
-        }
-        else
-        {
-            txtTotalPriceCard.text = "$" + totalPriceCheckOut.ToString("0.00");
-        }
-
-    }
-    public void UpdateCustomer()
-    {
-        currentCustomer.curItemBuy += 1;
-        if (currentCustomer.curItemBuy == currentCustomer.totalItemBuy)
-        {
-            currentCustomer.Pay();
-        }
-    }
-    public void UpdateCustomerSize(bool isHor)
-    {
-        if (isHor)
-        {
-            for (int i = 0; i < lstCustomer.Count; i++)
-            {
-                lstCustomer[i].transform.GetChild(0).localScale = new Vector3(130f, 130f, 130f);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < lstCustomer.Count; i++)
-            {
-                lstCustomer[i].transform.GetChild(0).localScale = new Vector3(160, 160, 160);
-            }
+            SpawnProduct(productChoose.prefab, lstPosParent.GetChild(i).transform.localPosition);
         }
     }
     public void ClickPlace()
     {
         if (index < 15)
         {
+            btnPlace.transform.GetChild(2).gameObject.SetActive(false);
             audioManager.PlaySoundClipPlace();
-            arrow.gameObject.SetActive(false);
             //lstProduct[0].GetComponent<MeshRenderer>().material = productChoose.mateOutLine;
             lstProduct[0].transform.SetParent(containerShelf);
             lstProduct[0].transform.DOLocalJump(parentPosShelf.GetChild(index).transform.localPosition, 0.4f, 1, 0.45f);
@@ -349,6 +260,9 @@ public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
             index++;
             if (index == 15)
             {
+                sliderProgress.DOFillAmount(0.75f, 0.2f);
+                cinemachineBrain.m_DefaultBlend.m_Time = 1.4f;
+                AudioManager.Instance.PlaySoundClipCorrect();
                 box.transform.DOMoveY(transform.position.y - 2, 0.3f).OnComplete(() =>
                 {
                     box.SetActive(false);
@@ -361,6 +275,7 @@ public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
         }
         else
         {
+            cinemachineBrain.m_DefaultBlend.m_Time = 1.4f;
             box.transform.DOMoveY(transform.position.y - 2, 0.3f).OnComplete(() =>
             {
                 box.SetActive(false);
@@ -383,7 +298,6 @@ public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
     }
     void SpawnProduct(GameObject obj, Vector3 pos)
     {
-        //Debug.Log(obj.name);
         GameObject newObj = Instantiate(obj);
         newObj.transform.SetParent(container);
         newObj.transform.localPosition = pos;
@@ -399,5 +313,81 @@ public class GameManagerPetShop3 : Singleton<GameManagerPetShop3>
     public void InstallFullGame()
     {
         Luna.Unity.Playable.InstallFullGame();
+    }
+
+
+
+
+
+
+
+
+
+
+
+    //OtherPlayAble
+    [HideInInspector] public float totalPriceCheckOut = 0;
+
+    [Header("OtherPlayableAds")]
+    public TextMeshProUGUI txtPerformCheckout;
+    public TextMeshProUGUI txtTotalMoney;
+    public GameObject guideClick;
+    public GameObject hanGuideClick1;
+    public GameObject hanGuideClick2;
+    public GameObject hanGuideClick3;
+    [HideInInspector] public bool availableSecondGuide;
+    [HideInInspector] public bool availableThirtyGuide;
+
+    public TextMeshProUGUI txtTotalPriceCard;
+    public GameObject checkoutCard;
+    public TextMeshProUGUI txtReceiveCash;
+    public TextMeshProUGUI txtTotalPriceCash;
+    public TextMeshProUGUI txtChangeCash;
+    public TextMeshProUGUI txtGivingCashDF;
+    public TextMeshProUGUI txtGivingCash;
+    public GameObject checkoutCash;
+
+    public GameObject dashCard, dashCash;
+
+
+    public GameObject uiChecKOutCard;
+    public GameObject uiChecKOutCash;
+    [HideInInspector] public CustomerPetShopp currentCustomer;
+
+    public void ActiveUICheckOut(TypeCheckOut type)
+    {
+
+    }
+    public void AddMoney()
+    {
+
+    }
+    public void EndCustomer()
+    {
+
+    }
+    public void UpdateTurnCheckOut()
+    {
+
+    }
+    public void ActionCustomer()
+    {
+
+    }
+    public void UpdatePrice(float price)
+    {
+
+    }
+    public void UpdateCustomer()
+    {
+
+    }
+    public void ActionGuide(bool boolean)
+    {
+
+    }
+    public void UpdateCustomerSize(bool boolean)
+    {
+
     }
 }

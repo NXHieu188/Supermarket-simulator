@@ -11714,6 +11714,9 @@ MonoBehaviour:
   clipCalculator: {fileID: 8300000, guid: ceaa6bcf234accc41830eeb54d09184e, type: 3}
   clipOk: {fileID: 8300000, guid: 37d705a82802f844aae0c5d269daaf27, type: 3}
   clipWrong: {fileID: 8300000, guid: e2ab49eced9c1e04ea0f2e9483235c5d, type: 3}
+  clipMoveBox: {fileID: 0}
+  clipMeo: {fileID: 0}
+  clipCorrect: {fileID: 0}
 --- !u!1 &1180202576
 GameObject:
   m_ObjectHideFlags: 0

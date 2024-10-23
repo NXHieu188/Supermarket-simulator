@@ -51,7 +51,7 @@ public class ElementProductPetShop : MonoBehaviour
         totalPrice = priceOnePack * currentPack;
         txtTotalPrice.text = "$" + totalPrice.ToString();
         CheckAvailable();
-        GameManagerPetShop2.Instance.ActionGuide();
+        GlobalGameManagerPetShop1.Instance.gameManagerInstance.ActionGuide();
         AudioManager.Instance.PlaySoundClipClick();
     }
     public void ClickAdd()
@@ -61,22 +61,22 @@ public class ElementProductPetShop : MonoBehaviour
         totalPrice = priceOnePack * currentPack;
         txtTotalPrice.text = "$" + totalPrice.ToString();
         CheckAvailable();
-        GameManagerPetShop2.Instance.ActionGuide();
+        GlobalGameManagerPetShop1.Instance.gameManagerInstance.ActionGuide();
         AudioManager.Instance.PlaySoundClipClick();
     }
     public void ClickBuy()
     {
         if (isAvailable)
         {
-            GameManagerPetShop2.Instance.CaculatorMoney(totalPrice, typeProduct);
+            GlobalGameManagerPetShop1.Instance.gameManagerInstance.CaculatorMoney(totalPrice, typeProduct);
             IsAvailableToBuy();
         }
-        GameManagerPetShop2.Instance.ActionGuide();
+        GlobalGameManagerPetShop1.Instance.gameManagerInstance.ActionGuide();
         AudioManager.Instance.PlaySoundClipClick();
     }
     void CheckAvailable()
     {
-        if (GameManagerPetShop2.Instance.totalMoney >= totalPrice)
+        if (GlobalGameManagerPetShop1.Instance.gameManagerInstance.totalMoney >= totalPrice)
         {
             btnBuy.sprite = btnOn;
             isAvailable = true;

@@ -100,6 +100,7 @@ public class GameManagerPetShop2 : Singleton<GameManagerPetShop2>
             {
                 box.transform.DOMoveY(transform.position.y - 2, 0.3f).OnComplete(() =>
                 {
+                    txtMission.text = "Open the store";
                     box.SetActive(false);
                     cameraEnd.gameObject.SetActive(true);
                     mission.SetActive(false);
