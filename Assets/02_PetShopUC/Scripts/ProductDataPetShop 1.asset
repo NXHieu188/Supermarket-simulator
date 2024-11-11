@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ded02b00629a35488e9ae80e9127b6f, type: 3}
+  m_Name: ProductDataPetShop 1
+  m_EditorClassIdentifier: 
+  lstProduct: []
+  lstProductPetShop:
+  - typeProduct: 0
+    icon: {fileID: 21300000, guid: c056f28b6062ead40a5391b77d9c622c, type: 3}
+    productName: Toy Bone
+    companyName: SSH
+    unitPrice: 1.69
+    prefab: {fileID: 6099776351940681583, guid: 545cf87a39e5b384d8f51edecc52455b, type: 3}
+    mateOutLine: {fileID: 2100000, guid: af25547bebf70814daecde08f5b5f38d, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 43841f08acd9cdb41899dc93ac12d5c6, type: 2}
+  - typeProduct: 1
+    icon: {fileID: 21300000, guid: 1679da6ca661de34eb04a8575002d3c8, type: 3}
+    productName: Dog Food
+    companyName: SSH
+    unitPrice: 2
+    prefab: {fileID: 127754479836717999, guid: bcf1c4abf590e364ebfc6b49a53c1dde, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 40bac9d47298eba4cb9b5a9d4a6c945c, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: dfa9dfc9d632cca468f2dfe793a4de15, type: 2}
+  - typeProduct: 2
+    icon: {fileID: 21300000, guid: 00ceb656b5769844494aa46a3ac32a40, type: 3}
+    productName: Cat Food
+    companyName: SSH
+    unitPrice: 1.25
+    prefab: {fileID: 6074723906941223359, guid: 33b88c1e929ed6947b96c12f0bcf1424, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 40bac9d47298eba4cb9b5a9d4a6c945c, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: dfa9dfc9d632cca468f2dfe793a4de15, type: 2}
+  - typeProduct: 3
+    icon: {fileID: 21300000, guid: 8c2eb60481e2c8f438b9faeef00914b4, type: 3}
+    productName: Cat Milk
+    companyName: SSH
+    unitPrice: 1.22
+    prefab: {fileID: 3981266178692615250, guid: 3a3fc5c4d0730074bb98b4f19418e531, type: 3}
+    mateOutLine: {fileID: 2100000, guid: af25547bebf70814daecde08f5b5f38d, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 43841f08acd9cdb41899dc93ac12d5c6, type: 2}
+  - typeProduct: 4
+    icon: {fileID: 21300000, guid: ea33839d779b9ae4887216d4d5ff05a1, type: 3}
+    productName: Sausage
+    companyName: SSH
+    unitPrice: 0.85
+    prefab: {fileID: 6967020433577619816, guid: 392f2f1ca2fdc754ea678c2cdcc38abc, type: 3}
+    mateOutLine: {fileID: 2100000, guid: af25547bebf70814daecde08f5b5f38d, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 43841f08acd9cdb41899dc93ac12d5c6, type: 2}
+  - typeProduct: 5
+    icon: {fileID: 21300000, guid: 1cb31e6211e41fd4fb75b71e8582bb98, type: 3}
+    productName: Shower
+    companyName: SSH
+    unitPrice: 1.73
+    prefab: {fileID: 1571882296518429955, guid: efe32cc8f2b53e340baf736fd602478b, type: 3}
+    mateOutLine: {fileID: 2100000, guid: af25547bebf70814daecde08f5b5f38d, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: 43841f08acd9cdb41899dc93ac12d5c6, type: 2}
+  - typeProduct: 6
+    icon: {fileID: 21300000, guid: 3b1478d4a8f098748a9f9c5839f26077, type: 3}
+    productName: Cat Bowl
+    companyName: SSH
+    unitPrice: 1.99
+    prefab: {fileID: 3902438193855621855, guid: dfaaf0cccc0219041b216f75ee469f19, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 40bac9d47298eba4cb9b5a9d4a6c945c, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: dfa9dfc9d632cca468f2dfe793a4de15, type: 2}
+  - typeProduct: 7
+    icon: {fileID: 21300000, guid: c5b702875945d214f982e084961db92c, type: 3}
+    productName: Dog Bowl
+    companyName: SSH
+    unitPrice: 1.99
+    prefab: {fileID: 1664520090992644673, guid: 4127983ba7e9dd04f9aa743b5600657d, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 40bac9d47298eba4cb9b5a9d4a6c945c, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: dfa9dfc9d632cca468f2dfe793a4de15, type: 2}
+  - typeProduct: 8
+    icon: {fileID: 21300000, guid: a2ecb1ed9c0055d4db418e5b20c0dec2, type: 3}
+    productName: Ham
+    companyName: SSH
+    unitPrice: 0.896
+    prefab: {fileID: 4334816002126783870, guid: c2e700403b2fefc44b58692e1a1a3fe7, type: 3}
+    mateOutLine: {fileID: 2100000, guid: 40bac9d47298eba4cb9b5a9d4a6c945c, type: 2}
+    mateNoOutLine: {fileID: 2100000, guid: dfa9dfc9d632cca468f2dfe793a4de15, type: 2}

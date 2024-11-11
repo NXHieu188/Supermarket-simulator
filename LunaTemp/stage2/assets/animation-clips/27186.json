@@ -1,0 +1,1 @@
+{"id":27186,"path":"Assets/00_Supermarket/Animations/ScaleAnim.anim","assetBundleId":-1,"data":["ScaleAnim",2,0,1,[["",0,"UnityEngine.RectTransform","m_LocalScale.x",[0,42],[]],["",0,"UnityEngine.RectTransform","m_LocalScale.y",[42,42],[]],["",0,"UnityEngine.RectTransform","m_LocalScale.z",[84,42],[]]],[],true,60,[0,0,0,0,0,0],0,null,[null,null]]}

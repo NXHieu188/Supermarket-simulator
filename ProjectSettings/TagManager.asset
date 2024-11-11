@@ -11,6 +11,8 @@ TagManager:
   - PaymentDesk
   - TrashCan
   - Shop
+  - Stop
+  - Esquina
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - UI
   - Item
   - Money
-  - 
+  - ShelfGuide
   - 
   - 
   - 
